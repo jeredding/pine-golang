@@ -1,4 +1,4 @@
-FROM golang:1.6.1-alpine
+FROM golang:alpine
 MAINTAINER Erik Redding <erik@erikerikerik.com>
 
 # install base services and stuff we need
@@ -25,6 +25,8 @@ RUN set -x \
 
 ENV GO15VENDOREXPERIMENT=1
 
-RUN mkdir -p /etc/pki/tls/certs
+ADD https://raw.githubusercontent.com/docker-library/golang/master/1.6/go-wrapper /usr/local/bin/go-wrapper
+RUN chmod +x /usr/local/bin/go-wrapper \
+    && mkdir -p /etc/pki/tls/certs
 
 CMD ["/bin/bash"]
