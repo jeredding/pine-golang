@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 export DOCKER_IMAGE=jeredding/pine-golang
-export IMAGE_TAG=1.6-dev
+export IMAGE_TAG=1.7-dev
 
 realpath () {
   [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
 BASENAME="$(dirname "$(realpath "$0")")";
+
+
+docker pull $(awk '/FROM/{print $2}' Dockerfile)
 
 ######
 # These options should be standard for any build that plans to be automated
